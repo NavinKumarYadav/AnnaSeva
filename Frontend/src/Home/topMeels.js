@@ -1,0 +1,30 @@
+export const topMeels=[
+    {
+    image:"https://images.pexels.com/photos/803290/pexels-photo-803290.jpeg?auto=compress&cs=tinysrgb&w=600",
+    title:"Pizza"
+},
+{
+    image:"https://images.pexels.com/photos/1639557/pexels-photo-1639557.jpeg?auto=compress&cs=tinysrgb&w=600",
+    title:"Burger"
+},
+{
+    image:"https://images.pexels.com/photos/1885578/pexels-photo-1885578.jpeg?auto=compress&cs=tinysrgb&w=600",
+    title:"Sandwiches"
+},
+{
+    image:"https://images.pexels.com/photos/1438672/pexels-photo-1438672.jpeg?auto=compress&cs=tinysrgb&w=600",
+    title:"Pasta"
+},
+{
+    image:"https://images.pexels.com/photos/5410410/pexels-photo-5410410.jpeg?auto=compress&cs=tinysrgb&w=600",
+    title:"Biryani"
+},
+{
+    image:"https://images.pexels.com/photos/5560763/pexels-photo-5560763.jpeg?auto=compress&cs=tinysrgb&w=600",
+    title:"Dosa"
+},
+{
+    image:"https://images.pexels.com/photos/4331491/pexels-photo-4331491.jpeg?auto=compress&cs=tinysrgb&w=600",
+    title:"Idli"
+}
+]
