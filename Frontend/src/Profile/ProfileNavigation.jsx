@@ -23,7 +23,9 @@ const menu = [
 const ProfileNavigation = ({ open, handleClose }) => {
   const isSmallScreen = useMediaQuery("(max-width:1080)");
   const navigate = useNavigate();
-  const handleNavigate = () => {};
+  const handleNavigate = (item) => {
+    navigate(`/my-profile/${item.title.toLowerCase()}`);
+  };
 
   return (
     <div>
@@ -40,7 +42,10 @@ const ProfileNavigation = ({ open, handleClose }) => {
         >
           {menu.map((item, i) => (
             <Fragment key={i}>
-              <div className="px-5 flex items-center space-x-5 cursor-pointer">
+              <div
+                onClick={() => handleNavigate(item)}
+                className="px-5 flex items-center space-x-5 cursor-pointer"
+              >
                 {item.icon}
                 <span>{item.title}</span>
               </div>

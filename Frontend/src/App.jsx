@@ -5,16 +5,19 @@ import Home from "./Home/Home";
 import RestaurantDetails from "./Restaurant/RestaurantDetails";
 import Cart from "./Cart/Cart";
 import Profile from "./Profile/Profile";
+import CustomerRoute from "./Routers/CustomerRoute";
+import { Auth } from "./Auth/Auth";
 
 function App() {
   return (
     <ThemeProvider theme={darkTheme}>
       <CssBaseline />
-      <Navbar />
+      {/* <Navbar /> */}
       {/* <Home /> */}
       {/* <RestaurantDetails /> */}
       {/* <Cart /> */}
-      <Profile />
+      {/* <Profile /> */}
+      <CustomerRoute />
     </ThemeProvider>
   );
 }
