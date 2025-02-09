@@ -1,4 +1,4 @@
-import { isPresentInFavorites } from "../component/Config/Logic";
+import { isPresentInFavorites } from "../../component/Config/Logic";
 import {
   ADD_TO_FAVORITE_FAILURE,
   ADD_TO_FAVORITE_REQUEST,
@@ -11,7 +11,7 @@ import {
   REGISTER_FAILURE,
   REGISTER_REQUEST,
   REGISTER_SUCCESS,
-} from "./Authentication/ActionType";
+} from "./ActionType";
 
 const initialState = {
   user: null,
