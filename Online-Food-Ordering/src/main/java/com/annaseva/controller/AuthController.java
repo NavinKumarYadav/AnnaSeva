@@ -12,10 +12,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import com.annaseva.config.JwtProvider;
 import com.annaseva.model.Cart;
@@ -26,6 +23,8 @@ import com.annaseva.repository.UserRepository;
 import com.annaseva.request.LoginRequest;
 import com.annaseva.response.AuthResponse;
 import com.annaseva.service.CustomerUserDetailsService;
+
+
 
 @RestController
 @RequestMapping("/auth")

@@ -104,7 +104,7 @@ public class OrderServiceImpl implements OrderService {
 
 		}
 
-		throw new Exception("Plese select a valid order status");
+		throw new Exception("Please select a valid order status");
 
 	}
 
