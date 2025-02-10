@@ -10,7 +10,7 @@ import { Auth } from "./Auth/Auth";
 import { useDispatch, useSelector } from "react-redux";
 import { store } from "./State/Store";
 import { useEffect } from "react";
-import { getUser } from "./State/Authentication/Action";
+import { getUser } from "./State/Authentication/Action.js";
 
 function App() {
   const dispatch = useDispatch();

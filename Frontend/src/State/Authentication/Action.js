@@ -15,26 +15,28 @@ import {
 } from "./ActionType";
 import { api, API_URL } from "../../component/Config/Api";
 
-export const registerUser = (reqData) => async (dispatch) => {
-  dispatch({ type: REGISTER_REQUEST });
-  try {
-    const { data } = await axios.post(
-      `${API_URL}/auth/signup`,
-      reqData.userData
-    );
-    if (data.jwt) localStorage.setItem("jwt", data.jwt);
-    if (data.role === "ROLE_RESTAURANT_OWNER") {
-      reqData.navigate("/admin/restaurant");
-    } else {
-      reqData.navigate("/");
+export function registerUser(reqData) {
+  return async (dispatch) => {
+    dispatch({ type: REGISTER_REQUEST });
+    try {
+      const { data } = await axios.post(
+        `${API_URL}/auth/signup`,
+        reqData.userData
+      );
+      if (data.jwt) localStorage.setItem("jwt", data.jwt);
+      if (data.role === "ROLE_RESTAURANT_OWNER") {
+        reqData.navigate("/admin/restaurant");
+      } else {
+        reqData.navigate("/");
+      }
+      dispatch({ type: REGISTER_SUCCESS, payload: data.jwt });
+      console.log("register success", data);
+    } catch (error) {
+      dispatch({ type: REGISTER_FAILURE, payload: error });
+      console.log("error", error);
     }
-    dispatch({ type: REGISTER_SUCCESS, payload: data.jwt });
-    console.log("register success", data);
-  } catch (error) {
-    dispatch({ type: REGISTER_FAILURE, payload: error });
-    console.log("error", error);
-  }
-};
+  };
+}
 
 export const loginUser = (reqData) => async (dispatch) => {
   dispatch({ type: LOGIN_REQUEST });
@@ -57,27 +59,27 @@ export const loginUser = (reqData) => async (dispatch) => {
   }
 };
 
-export const getUser = () => async (dispatch) => {
+export const getUser = (jwt) => async (dispatch) => {
   dispatch({ type: GET_USER_REQUEST });
   try {
     const jwt = localStorage.getItem("jwt");
-    // console.log("Retrieved token:", jwt);
+    console.log("Retrieved token:", jwt);
 
     if (!jwt) {
       throw new Error("No token found in localStorage");
     }
 
-    const { data } = await api.get(`/auth/signin`, {
+    const { data } = await api.get(`/api/users/profile`, {
       headers: {
         Authorization: `Bearer ${jwt}`,
       },
     });
 
-    dispatch({ type: REGISTER_SUCCESS, payload: data });
+    dispatch({ type: LOGIN_SUCCESS, payload: data });
     console.log("user profile", data);
   } catch (error) {
     dispatch({ type: GET_USER_FAILURE, payload: error });
-    //console.log("error", error);
+    console.log("error", error);
   }
 };
 

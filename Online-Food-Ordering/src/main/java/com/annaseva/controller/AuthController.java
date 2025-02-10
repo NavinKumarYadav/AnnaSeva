@@ -28,6 +28,7 @@ import com.annaseva.service.CustomerUserDetailsService;
 
 @RestController
 @RequestMapping("/auth")
+@CrossOrigin(origins = "http://localhost:5174")
 public class AuthController {
 
 	@Autowired

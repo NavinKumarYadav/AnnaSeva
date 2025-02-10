@@ -10,7 +10,7 @@ import {
 import { Field, Form, Formik } from "formik";
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import { registerUser } from "../State/Authentication/Action";
+import { registerUser } from "../State/Authentication/Action.js";
 import { useDispatch } from "react-redux";
 
 const initialValues = {
@@ -20,7 +20,7 @@ const initialValues = {
   role: "ROLE_CUSTOMER",
 };
 
-const RegisterForm = () => {
+export default function RegisterForm() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -94,6 +94,4 @@ const RegisterForm = () => {
       </Typography>
     </div>
   );
-};
-
-export default RegisterForm;
+}

@@ -42,9 +42,9 @@ public class AppConfig {
 				CorsConfiguration cfg = new CorsConfiguration();
 
 				cfg.setAllowedOrigins(Arrays.asList("http://localhost:5174"));
-				cfg.setAllowedMethods(Collections.singletonList("*"));
+				cfg.setAllowedMethods(Arrays.asList("GET","PUT","POST","DELETE","PATCH","OPTIONS"));
 				cfg.setAllowCredentials(true);
-				cfg.setAllowedHeaders(Collections.singletonList("*"));
+				cfg.setAllowedHeaders(Arrays.asList("Authorization", "Content-Type"));
 				cfg.setExposedHeaders(Arrays.asList("Authorization"));
 				cfg.setMaxAge(3600L);
 
@@ -55,6 +55,7 @@ public class AppConfig {
 
 	@Bean
 	PasswordEncoder passwordEncoder() {
+
 		return new BCryptPasswordEncoder();
 	}
 
