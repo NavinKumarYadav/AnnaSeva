@@ -5,6 +5,7 @@ import {
   ADD_TO_FAVORITE_SUCCESS,
   GET_USER_FAILURE,
   GET_USER_REQUEST,
+  GET_USER_SUCCESS,
   LOGIN_FAILURE,
   LOGIN_REQUEST,
   LOGIN_SUCCESS,
@@ -14,6 +15,7 @@ import {
   REGISTER_SUCCESS,
 } from "./ActionType";
 import { api, API_URL } from "../../component/Config/Api";
+import { redirect, useNavigate } from "react-router-dom";
 
 export function registerUser(reqData) {
   return async (dispatch) => {
@@ -75,7 +77,7 @@ export const getUser = () => async (dispatch) => {
       },
     });
 
-    dispatch({ type: LOGIN_SUCCESS, payload: data });
+    dispatch({ type: GET_USER_SUCCESS, payload: data });
     console.log("user profile", data);
   } catch (error) {
     dispatch({ type: GET_USER_FAILURE, payload: error });
@@ -106,7 +108,6 @@ export const addToFavorite = (restaurantId) => async (dispatch) => {
 };
 
 export const logout = () => async (dispatch) => {
-  dispatch({ type: LOGOUT });
   try {
     localStorage.clear();
     dispatch({ type: LOGOUT });
