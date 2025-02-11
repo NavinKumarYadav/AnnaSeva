@@ -59,7 +59,7 @@ export const loginUser = (reqData) => async (dispatch) => {
   }
 };
 
-export const getUser = (jwt) => async (dispatch) => {
+export const getUser = () => async (dispatch) => {
   dispatch({ type: GET_USER_REQUEST });
   try {
     const jwt = localStorage.getItem("jwt");
@@ -106,7 +106,7 @@ export const addToFavorite = (restaurantId) => async (dispatch) => {
 };
 
 export const logout = () => async (dispatch) => {
-  dispatch({ type: ADD_TO_FAVORITE_REQUEST });
+  dispatch({ type: LOGOUT });
   try {
     localStorage.clear();
     dispatch({ type: LOGOUT });
