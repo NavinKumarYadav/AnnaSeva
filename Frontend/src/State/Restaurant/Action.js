@@ -118,7 +118,7 @@ export const createRestaurant = (reqData) => {
   return async (dispatch) => {
     dispatch({ type: CREATE_RESTAURANT_REQUEST });
     try {
-      const { data } = await api.post(`/api/admi/restaurants`, reqData.data, {
+      const { data } = await api.post(`/api/admin/restaurants`, reqData.data, {
         headers: {
           Authorization: `Bearer ${reqData.token}`,
         },
@@ -207,15 +207,19 @@ export const updateRestaurantStatus = ({ restaurantId, jwt }) => {
   };
 };
 
-export const createEvent = ({ data, jwt, restaurantId }) => {
+export const createEventAction = ({ data, jwt, restaurantId }) => {
   return async (dispatch) => {
     dispatch({ type: CREATE_EVENT_REQUEST });
     try {
-      const res = await api.post(`api/admim/events/${restaurantId}`, data, {
-        headers: {
-          Authorization: `Bearer ${jwt}`,
-        },
-      });
+      const res = await api.post(
+        `api/admim/events/restaurant/${restaurantId}`,
+        data,
+        {
+          headers: {
+            Authorization: `Bearer ${jwt}`,
+          },
+        }
+      );
       console.log("create event", res.data);
       dispatch({ type: CREATE_EVENT_SUCCESS, payload: res.data });
     } catch (error) {
@@ -228,7 +232,7 @@ export const createEvent = ({ data, jwt, restaurantId }) => {
   };
 };
 
-export const getAllEvent = ({ jwt }) => {
+export const getAllEvents = ({ jwt }) => {
   return async (dispatch) => {
     dispatch({ type: GET_ALL_EVENT_REQUEST });
     try {
