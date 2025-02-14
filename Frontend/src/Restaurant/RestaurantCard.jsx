@@ -20,12 +20,12 @@ const RestaurantCard = ({ item }) => {
 
   const handleNavigateToRestaurant = () => {
     if (item.open) {
-      navigate(`/restaurant/${item.address.city}/${item.name}/${item.id}`);
+      navigate(`/restaurant/${item?.address?.city}/${item.name}/${item.id}`);
     }
   };
 
   return (
-    <Card className="w-[18rem]">
+    <Card className="w-[18rem]" onClick={handleNavigateToRestaurant}>
       <div
         className={`${true ? "cursor-pointer" : "cursor-not-allowed"} relative`}
       >
@@ -44,12 +44,7 @@ const RestaurantCard = ({ item }) => {
       </div>
       <div className="p-4 textPart lg:flex w-full justify-between">
         <div className="space-y-1">
-          <p
-            onClick={handleNavigateToRestaurant}
-            className="font-semibold text-lg cursor-pointer"
-          >
-            {item.name}
-          </p>
+          <p className="font-semibold text-lg cursor-pointer">{item.name}</p>
           <p className="text-gray-500 text-sm">{item.description}</p>
         </div>
         <IconButton onClick={handleAddToFavorites}>

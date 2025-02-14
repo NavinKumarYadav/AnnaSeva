@@ -19,7 +19,6 @@ export const getIngredientsOfRestaurant = ({ id, jwt }) => {
           },
         }
       );
-      console.log("get all ingredients", response.data);
       dispatch({
         type: GET_INGREDIENTS,
         payload: response.data,
@@ -38,7 +37,6 @@ export const createIngredient = ({ data, jwt }) => {
           Authorization: `Bearer ${jwt}`,
         },
       });
-      console.log("create ingredients", response.data);
       dispatch({
         type: CREATE_INGREDIENT_SUCCESS,
         payload: response.data,
@@ -50,7 +48,6 @@ export const createIngredient = ({ data, jwt }) => {
 };
 
 export const createIngredientCategory = ({ data, jwt }) => {
-  console.log("data", data, "jwt", jwt);
   return async (dispatch) => {
     try {
       const response = await api.post(`/api/admin/ingredients/category`, data, {
@@ -58,7 +55,6 @@ export const createIngredientCategory = ({ data, jwt }) => {
           Authorization: `Bearer ${jwt}`,
         },
       });
-      console.log("create ingredients category", response.data);
       dispatch({
         type: CREATE_INGREDIENT_CATEGORY_SUCCESS,
         payload: response.data,
@@ -80,7 +76,6 @@ export const getIngredientCategory = ({ id, jwt }) => {
           },
         }
       );
-      console.log("get all ingredients category", response.data);
       dispatch({
         type: GET_INGREDIENT_CATEGORY_SUCCESS,
         payload: response.data,
@@ -103,7 +98,6 @@ export const updateStockOfIngredient = ({ id, jwt }) => {
           },
         }
       );
-      console.log("update ingredients stock", response.data);
       dispatch({
         type: UPDATE_STOCK,
         payload: data,

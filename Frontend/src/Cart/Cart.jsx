@@ -10,9 +10,10 @@ import {
 import React from "react";
 import CartItem from "./CartItem";
 import AddressCard from "./AddressCard";
-import { AddLocation } from "@mui/icons-material";
+import { AddLocation, Store } from "@mui/icons-material";
 import { ErrorMessage, Field, Formik, Form } from "formik";
 import * as Yup from "yup";
+import { useSelector } from "react-redux";
 
 export const style = {
   position: "absolute",
@@ -48,9 +49,9 @@ const Cart = () => {
   const [open, setOpen] = React.useState(false);
   const handleOpenAddressModel = () => setOpen(true);
   const handleClose = () => setOpen(false);
+  const { cart } = useSelector((store) => store);
 
   const handleSubmit = (values, { resetForm }) => {
-    console.log("Form Submitted", values);
     resetForm();
     handleClose();
   };
@@ -59,8 +60,8 @@ const Cart = () => {
     <>
       <main className="lg:flex justify-between">
         <section className="lg:w-[30%] space-y-6 lg:min-h-screen pt-10">
-          {items.map((item, i) => (
-            <CartItem key={i} />
+          {cart.cart?.items?.map((item, i) => (
+            <CartItem item={item} key={i} />
           ))}
           <Divider />
           <div className="billDetails px-5 text-sm">

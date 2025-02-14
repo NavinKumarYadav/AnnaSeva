@@ -90,7 +90,7 @@ export const addToFavorite = (restaurantId) => async (dispatch) => {
   try {
     const jwt = localStorage.getItem("jwt");
     const { data } = await api.put(
-      `/api/restaurants/${restaurantId}/add-favorites`,
+      `/api/restaurants/${restaurantId}/add-favorite`,
       {},
       {
         headers: {

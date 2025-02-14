@@ -28,7 +28,6 @@ const MenuCard = ({ item }) => {
   const [selectedIngredients, setSelectedIngredients] = useState([]);
   const dispatch = useDispatch();
   const handleCheckBoxChange = (itemName) => {
-    console.log("value", itemName);
     if (selectedIngredients.includes(itemName)) {
       setSelectedIngredients(
         selectedIngredients.filter((item) => item !== itemName)
@@ -49,7 +48,6 @@ const MenuCard = ({ item }) => {
       },
     };
     dispatch(addItemToCart(reqData));
-    console.log("req data", reqData);
   };
 
   return (
