@@ -21,7 +21,7 @@ export const createMenuItem = ({ menu, jwt }) => {
   return async (dispatch) => {
     dispatch({ type: CREATE_MENU_ITEM_REQUEST });
     try {
-      const response = await api.post("api/admin/food", menu, {
+      const { data } = await api.post("api/admin/food", menu, {
         headers: {
           Authorization: `Bearer ${jwt}`,
         },
@@ -40,7 +40,7 @@ export const getMenuItemsByRestaurantId = (reqData) => {
     dispatch({ type: GET_MENU_ITEMS_BY_RESTAURANT_ID_REQUEST });
     try {
       const { data } = await api.get(
-        `/api/food/restaurant/${reqData.restaurantId}?vegetarian=${reqData.vegetarian}&nonveg=${reqData.nonveg} &seasonal=${reqData.seasonal}&food_category=${reqData.food_category}`,
+        `/api/food/restaurant/${reqData.restaurantId}?vagetarian=${reqData.vegetarian}&nonveg=${reqData.nonveg} &seasonal=${reqData.seasonal}&food_category=${reqData.food_category}`,
         {
           headers: {
             Authorization: `Bearer ${reqData.jwt}`,

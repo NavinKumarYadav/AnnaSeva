@@ -13,9 +13,11 @@ import CalendarTodayIcon from "@mui/icons-material/CalendarToday";
 import MenuCard from "./MenuCard";
 import { useNavigate, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { getRestaurantById } from "../State/Restaurant/Action";
-
-const categories = ["pizza", "biryani", "burger", "chiken", "rice"];
+import {
+  getRestaurantById,
+  getRestaurantCategory,
+} from "../State/Restaurant/Action";
+import { getMenuItemsByRestaurantId } from "../State/Menu/Action";
 
 const foodTypes = [
   { label: "All", value: "all" },
@@ -43,6 +45,17 @@ const RestaurantDetails = () => {
 
   useEffect(() => {
     dispatch(getRestaurantById({ jwt, restaurantId: id }));
+    dispatch(getRestaurantCategory({ jwt, restaurantId: id }));
+    dispatch(
+      getMenuItemsByRestaurantId({
+        jwt,
+        restaurantId: id,
+        vegetarian: false,
+        nonveg: false,
+        seasonal: false,
+        foodCategory: "",
+      })
+    );
   }, []);
 
   return (
@@ -131,12 +144,12 @@ const RestaurantDetails = () => {
                   name="food_type"
                   value={foodType}
                 >
-                  {categories.map((item) => (
+                  {restaurant.categories.map((item) => (
                     <FormControlLabel
                       key={item}
                       value={item}
                       control={<Radio />}
-                      label={item}
+                      label={item.name}
                     />
                   ))}
                 </RadioGroup>
