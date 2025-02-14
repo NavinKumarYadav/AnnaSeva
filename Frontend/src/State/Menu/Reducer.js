@@ -43,18 +43,19 @@ const menuItemReducer = (state = initialState, action) => {
         ),
       };
     case actionTypes.SEARCH_MENU_ITEM_SUCCESS:
-        return {
-            ...state,
-            loading: false,
-            search: action.payload
-        };
+      return {
+        ...state,
+        loading: false,
+        search: action.payload,
+      };
     case actionTypes.UPDATE_MENU_ITEMS_AVAILABILITY_SUCCESS:
-        console.log("updated items id", action.payload);
+      console.log("updated items id", action.payload);
       return {
         ...state,
         loading: false,
         menuItems: state.menuItems.map((menuItem) =>
           menuItem.id === action.payload.id ? action.payload : menuItem
+        ),
       };
     case actionTypes.CREATE_MENU_ITEM_FAILURE:
     case actionTypes.GET_MENU_ITEMS_BY_RESTAURANT_ID_FAILURE:
