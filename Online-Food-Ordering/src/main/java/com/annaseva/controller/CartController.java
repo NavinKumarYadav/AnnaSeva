@@ -34,7 +34,7 @@ public class CartController {
 	public ResponseEntity<CartItem> addItemToCart(@RequestBody AddCartItemRequest req,
 			@RequestHeader("Authorization") String jwt) throws Exception {
 
-		CartItem cartItem = cartService.additemToCart(req, jwt);
+		CartItem cartItem = cartService.addItemToCart(req, jwt);
 
 		return new ResponseEntity<>(cartItem, HttpStatus.OK);
 

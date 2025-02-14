@@ -29,7 +29,7 @@ public class CartServiceIpml implements CartService {
 	private FoodService foodService;
 
 	@Override
-	public CartItem additemToCart(AddCartItemRequest req, String jwt) throws Exception {
+	public CartItem addItemToCart(AddCartItemRequest req, String jwt) throws Exception {
 
 		User user = userService.findUserByJwtToken(jwt);
 

@@ -6,7 +6,7 @@ import com.annaseva.request.AddCartItemRequest;
 
 public interface CartService {
 
-	public CartItem additemToCart(AddCartItemRequest req, String jwt) throws Exception;
+	public CartItem addItemToCart(AddCartItemRequest req, String jwt) throws Exception;
 
 	public CartItem updateCartItemQuantity(Long cartItemId, int quantity) throws Exception;
 
