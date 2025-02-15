@@ -13,7 +13,8 @@ import AddressCard from "./AddressCard";
 import { AddLocation, Store } from "@mui/icons-material";
 import { ErrorMessage, Field, Formik, Form } from "formik";
 import * as Yup from "yup";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { createOrder } from "../State/Order/Action";
 
 export const style = {
   position: "absolute",
@@ -34,14 +35,12 @@ const initialValues = {
   city: "",
 };
 
-const validationSchema = Yup.object().shape({
-  streetAddress: Yup.string().required("Street address is required"),
-  state: Yup.string().required("State is required"),
-  pincode: Yup.string().required("Pincode is required"), // Changed to string to avoid leading-zero issues
-  city: Yup.string().required("City is required"),
-});
-
-const items = [1, 1];
+// const validationSchema = Yup.object().shape({
+//   streetAddress: Yup.string().required("Street address is required"),
+//   state: Yup.string().required("State is required"),
+//   pincode: Yup.string().required("Pincode is required"), // Changed to string to avoid leading-zero issues
+//   city: Yup.string().required("City is required"),
+// });
 
 const Cart = () => {
   const createOrderUsingSelectedAddress = () => {};
@@ -49,18 +48,35 @@ const Cart = () => {
   const [open, setOpen] = React.useState(false);
   const handleOpenAddressModel = () => setOpen(true);
   const handleClose = () => setOpen(false);
-  const { cart } = useSelector((store) => store);
+  const { cart, auth } = useSelector((store) => store);
+  const dispatch = useDispatch();
 
   const handleSubmit = (values, { resetForm }) => {
     resetForm();
     handleClose();
+
+    const data = {
+      jwt: localStorage.getItem("jwt"),
+      order: {
+        restaurantId: cart.cartItem[0].food?.restaurant.id,
+        deliveryAddress: {
+          fullName: auth.user?.fullName,
+          streetAddress: values.streetAddress,
+          city: values.city,
+          state: values.state,
+          postalCode: values.pincode,
+          country: "india",
+        },
+      },
+    };
+    dispatch(createOrder(data));
   };
 
   return (
     <>
       <main className="lg:flex justify-between">
         <section className="lg:w-[30%] space-y-6 lg:min-h-screen pt-10">
-          {cart.cart?.items?.map((item, i) => (
+          {cart.cartItems?.map((item, i) => (
             <CartItem item={item} key={i} />
           ))}
           <Divider />
@@ -69,7 +85,7 @@ const Cart = () => {
             <div className="space-y-3">
               <div className="flex justify-between text-gray-400">
                 <p>Item Total</p>
-                <p>₹599</p>
+                <p>₹{cart.cart?.total}</p>
               </div>
               <div className="flex justify-between text-gray-400">
                 <p>Delivery Fee</p>
@@ -87,7 +103,7 @@ const Cart = () => {
             </div>
             <div className="flex justify-between text-gray-400">
               <p>Total pay</p>
-              <p>₹5000</p>
+              <p>₹{cart.cart?.total + 45 + 67 + 5}</p>
             </div>
           </div>
         </section>

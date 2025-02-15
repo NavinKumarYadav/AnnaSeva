@@ -36,13 +36,13 @@ const CartItem = ({ item }) => {
             <p>{item.food.name}</p>
             <div className="flex justify-between items-center">
               <div className="flex items-center space-x-1">
-                <IconButton onClick={() => updateCartItem(-1)}>
+                <IconButton onClick={() => handleUpdateCartItem(-1)}>
                   <RemoveCircleOutlineIcon />
                 </IconButton>
                 <div className="w-5 h-5 text-xs flex items-center justify-center">
                   {item.quantity}
                 </div>
-                <IconButton onClick={() => updateCartItem(1)}>
+                <IconButton onClick={() => handleUpdateCartItem(1)}>
                   <AddCircleOutlineIcon></AddCircleOutlineIcon>
                 </IconButton>
               </div>
