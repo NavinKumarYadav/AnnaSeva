@@ -32,10 +32,8 @@ export function registerUser(reqData) {
         reqData.navigate("/");
       }
       dispatch({ type: REGISTER_SUCCESS, payload: data.jwt });
-      console.log("register success", data);
     } catch (error) {
       dispatch({ type: REGISTER_FAILURE, payload: error });
-      console.log("error", error);
     }
   };
 }
@@ -65,7 +63,6 @@ export const getUser = () => async (dispatch) => {
   dispatch({ type: GET_USER_REQUEST });
   try {
     const jwt = localStorage.getItem("jwt");
-    console.log("Retrieved token:", jwt);
 
     if (!jwt) {
       throw new Error("No token found in localStorage");
@@ -78,40 +75,37 @@ export const getUser = () => async (dispatch) => {
     });
 
     dispatch({ type: GET_USER_SUCCESS, payload: data });
-    console.log("user profile", data);
   } catch (error) {
     dispatch({ type: GET_USER_FAILURE, payload: error });
-    console.log("error", error);
   }
 };
 
-export const addToFavorite = (restaurantId) => async (dispatch) => {
-  dispatch({ type: ADD_TO_FAVORITE_REQUEST });
-  try {
-    const jwt = localStorage.getItem("jwt");
-    const { data } = await api.put(
-      `/api/restaurants/${restaurantId}/add-favorite`,
-      {},
-      {
-        headers: {
-          Authorization: `Bearer ${jwt}`,
-        },
-      }
-    );
+export const addToFavorite =
+  ({ jwt, restaurantId }) =>
+  async (dispatch) => {
+    dispatch({ type: ADD_TO_FAVORITE_REQUEST });
+    try {
+      //const jwt = localStorage.getItem("jwt");
+      const { data } = await api.put(
+        `/api/restaurants/${restaurantId}/add-favorites`,
+        {},
+        {
+          headers: {
+            Authorization: `Bearer ${jwt}`,
+          },
+        }
+      );
 
-    dispatch({ type: ADD_TO_FAVORITE_SUCCESS, payload: data });
-    console.log("added to favorite", data);
-  } catch (error) {
-    dispatch({ type: ADD_TO_FAVORITE_FAILURE, payload: error });
-    console.log("error", error);
-  }
-};
+      dispatch({ type: ADD_TO_FAVORITE_SUCCESS, payload: data });
+    } catch (error) {
+      dispatch({ type: ADD_TO_FAVORITE_FAILURE, payload: error });
+    }
+  };
 
 export const logout = () => async (dispatch) => {
   try {
     localStorage.clear();
     dispatch({ type: LOGOUT });
-    console.log("logout success");
   } catch (error) {
     console.log("error", error);
   }

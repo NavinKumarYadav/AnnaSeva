@@ -35,12 +35,12 @@ const initialValues = {
   city: "",
 };
 
-// const validationSchema = Yup.object().shape({
-//   streetAddress: Yup.string().required("Street address is required"),
-//   state: Yup.string().required("State is required"),
-//   pincode: Yup.string().required("Pincode is required"), // Changed to string to avoid leading-zero issues
-//   city: Yup.string().required("City is required"),
-// });
+const validationSchema = Yup.object().shape({
+  streetAddress: Yup.string().required("Street address is required"),
+  state: Yup.string().required("State is required"),
+  pincode: Yup.string().required("Pincode is required"), // Changed to string to avoid leading-zero issues
+  city: Yup.string().required("City is required"),
+});
 
 const Cart = () => {
   const createOrderUsingSelectedAddress = () => {};

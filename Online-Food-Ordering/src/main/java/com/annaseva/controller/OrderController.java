@@ -2,6 +2,8 @@ package com.annaseva.controller;
 
 import java.util.List;
 
+import com.annaseva.response.PaymentResponse;
+import com.annaseva.service.PaymentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -26,17 +28,21 @@ public class OrderController {
 	private OrderService orderService;
 
 	@Autowired
+	private PaymentService paymentService;
+
+	@Autowired
 	private UserService userService;
 
 	@PostMapping("/order")
-	public ResponseEntity<Order> createOrder(@RequestBody OrderRequest req, @RequestHeader("Authorization") String jwt)
+	public ResponseEntity<PaymentResponse> createOrder(@RequestBody OrderRequest req, @RequestHeader("Authorization") String jwt)
 			throws Exception {
 
 		User user = userService.findUserByJwtToken(jwt);
 
 		Order order = orderService.createOrder(req, user);
+		PaymentResponse res = paymentService.createPaymentLink(order);
 
-		return new ResponseEntity<>(order, HttpStatus.OK);
+		return new ResponseEntity<>(res, HttpStatus.OK);
 
 	}
 
